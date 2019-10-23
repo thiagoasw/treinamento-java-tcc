@@ -1,5 +1,7 @@
 package com.totvs.tj.tcc.domain.conta;
 
+import static com.totvs.tj.tcc.domain.conta.Conta.Situacao.ABERTO;
+import static com.totvs.tj.tcc.domain.conta.Conta.Situacao.SUSPENSO;
 import static lombok.AccessLevel.PRIVATE;
 
 import lombok.AllArgsConstructor;
@@ -19,4 +21,19 @@ public class Conta {
     
     private ResponsavelId responsavel;
 
+    private Situacao situacao;
+    
+    public void suspender() {
+        situacao = SUSPENSO;
+    }
+
+    public boolean isDisponivel() {
+        return ABERTO.equals(situacao);
+    }
+    
+    static enum Situacao {
+
+        ABERTO, SUSPENSO;
+        
+    }
 }

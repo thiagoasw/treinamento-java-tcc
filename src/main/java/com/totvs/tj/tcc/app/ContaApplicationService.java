@@ -3,8 +3,8 @@ package com.totvs.tj.tcc.app;
 import org.springframework.stereotype.Service;
 
 import com.totvs.tj.tcc.domain.conta.Conta;
-import com.totvs.tj.tcc.domain.conta.ContaRepository;
 import com.totvs.tj.tcc.domain.conta.ContaId;
+import com.totvs.tj.tcc.domain.conta.ContaRepository;
 
 @Service
 public class ContaApplicationService {
@@ -28,6 +28,15 @@ public class ContaApplicationService {
         repository.save(conta);
         
         return idConta; 
+    }
+    
+    public void handle(SuspenderContaCommand cmd) {
+        
+        Conta conta = repository.getOne(cmd.getConta());
+        
+        conta.suspender();
+        
+        repository.save(conta);
     }
     
 }
