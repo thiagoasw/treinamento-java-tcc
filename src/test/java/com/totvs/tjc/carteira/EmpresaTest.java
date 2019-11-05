@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.money.MonetaryAmount;
 
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +29,7 @@ public class EmpresaTest {
         razaoSocial = "Candura LTDA";
         cnpj = Cnpj.from("23.964.134/0001-28");
         funcionarios = 100;
-        valorMercado = Money.of(9800000, "BRL");
+        valorMercado = FastMoney.of(9800000, "BRL");
 
         responsavel = Responsavel.of("Joviano Antunes", Cpf.from("004.574.359-25"));
     }
@@ -68,13 +68,13 @@ public class EmpresaTest {
     void empresaComNomeEmBrancoDeveFalhar() {
         assertThrows(IllegalArgumentException.class, () -> {
             Empresa.builder("", cnpj)
-                .valorMercado(Money.of(10000, "BRL"))
+                .valorMercado(FastMoney.of(10000, "BRL"))
                 .responsavel(responsavel)
             .build();
         });
         assertThrows(IllegalArgumentException.class, () -> {
             Empresa.builder("   ", cnpj)
-                .valorMercado(Money.of(10000, "BRL"))
+                .valorMercado(FastMoney.of(10000, "BRL"))
                 .responsavel(responsavel)
             .build();
         });
@@ -106,7 +106,7 @@ public class EmpresaTest {
     @Test
     @DisplayName("Sem valor de mercado")
     void empresaSemValorMercadoDeveFalhar() {
-        assertThrows(IllegalArgumentException.class, () -> builder.valorMercado(Money.of(-10, "BRL")).build());
-        assertThrows(IllegalArgumentException.class, () -> builder.valorMercado(Money.of(0, "BRL")).build());
+        assertThrows(IllegalArgumentException.class, () -> builder.valorMercado(FastMoney.of(-10, "BRL")).build());
+        assertThrows(IllegalArgumentException.class, () -> builder.valorMercado(FastMoney.of(0, "BRL")).build());
     }
 }

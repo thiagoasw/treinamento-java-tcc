@@ -5,7 +5,7 @@ import static com.totvs.tjc.carteira.PoliticaLimiteAberturaConta.POLITICA_PADRAO
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -25,21 +25,21 @@ public class PoliticaLimiteAberturaContaTest {
         @Test
         @DisplayName("Dentro do limite")
         void limiteDentroDoPadrao() {
-            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(Money.of(50000, "BRL")).build();
+            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(FastMoney.of(50000, "BRL")).build();
             assertTrue(POLITICA_PADRAO.calcularLimiteInicial(empresa).isLessThanOrEqualTo(POLITICA_PADRAO.getLimiteMaximo()));
         }
 
         @Test
         @DisplayName("Calculo do limite")
         void limiteCorretoPadrao() {
-            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(Money.of(50000, "BRL")).build();
-            assertEquals(Money.of(1000, "BRL"), POLITICA_PADRAO.calcularLimiteInicial(empresa));
+            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(FastMoney.of(50000, "BRL")).build();
+            assertEquals(FastMoney.of(1000, "BRL"), POLITICA_PADRAO.calcularLimiteInicial(empresa));
         }
 
         @Test
         @DisplayName("Limite dentro do padrão para empresas gigantes")
         void limiteDentroPadraoParaGrandesEmpresas() {
-            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(Money.of(5000000, "BRL")).build();
+            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(FastMoney.of(5000000, "BRL")).build();
             assertEquals(POLITICA_PADRAO.getLimiteMaximo(), POLITICA_PADRAO.calcularLimiteInicial(empresa));
         }
 
@@ -52,21 +52,21 @@ public class PoliticaLimiteAberturaContaTest {
         @Test
         @DisplayName("Dentro do limite")
         void limiteDentroDoPadrao() {
-            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(Money.of(50000, "BRL")).build();
+            Empresa empresa = builderEmpresa.funcionarios(50).valorMercado(FastMoney.of(50000, "BRL")).build();
             assertTrue(POLITICA_MEI.calcularLimiteInicial(empresa).isLessThanOrEqualTo(POLITICA_MEI.getLimiteMaximo()));
         }
 
         @Test
         @DisplayName("Calculo do limite para pequenas empresas")
         void limiteCorretoPadrao() {
-            Empresa empresa = builderEmpresa.funcionarios(1).valorMercado(Money.of(1, "BRL")).build();
+            Empresa empresa = builderEmpresa.funcionarios(1).valorMercado(FastMoney.of(1, "BRL")).build();
             assertTrue(POLITICA_MEI.calcularLimiteInicial(empresa).isLessThanOrEqualTo(POLITICA_MEI.getLimiteMaximo()));
         }
 
         @Test
         @DisplayName("Limite dentro do padrão para empresas gigantes")
         void limiteDentroPadraoParaGrandesEmpresas() {
-            Empresa empresa = builderEmpresa.funcionarios(1000).valorMercado(Money.of(600000, "BRL")).build();
+            Empresa empresa = builderEmpresa.funcionarios(1000).valorMercado(FastMoney.of(600000, "BRL")).build();
             assertTrue(POLITICA_MEI.calcularLimiteInicial(empresa).isLessThanOrEqualTo(POLITICA_MEI.getLimiteMaximo()));
         }
 

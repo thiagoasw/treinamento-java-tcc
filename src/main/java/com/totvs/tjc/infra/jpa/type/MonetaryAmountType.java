@@ -15,6 +15,7 @@ import org.hibernate.type.BigDecimalType;
 import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
 import org.hibernate.usertype.CompositeUserType;
+import org.javamoney.moneta.FastMoney;
 import org.javamoney.moneta.Money;
 
 public class MonetaryAmountType implements CompositeUserType {
@@ -30,8 +31,8 @@ public class MonetaryAmountType implements CompositeUserType {
     }
 
     @Override
-    public Class<Money> returnedClass() {
-        return Money.class;
+    public Class<FastMoney> returnedClass() {
+        return FastMoney.class;
     }
 
     @Override
@@ -65,11 +66,11 @@ public class MonetaryAmountType implements CompositeUserType {
 
         assert names.length == 2;
 
-        Money money = null;
+        FastMoney money = null;
         final String currency = resultSet.getString(names[0]);
 
         if (!resultSet.wasNull()) {
-            money = Money.of(resultSet.getBigDecimal(names[1]), currency);
+            money = FastMoney.of(resultSet.getBigDecimal(names[1]), currency);
         }
 
         return money;

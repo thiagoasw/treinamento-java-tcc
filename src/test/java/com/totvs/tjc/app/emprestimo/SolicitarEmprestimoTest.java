@@ -14,7 +14,7 @@ import javax.money.MonetaryAmount;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -60,7 +60,7 @@ public class SolicitarEmprestimoTest {
         Empresa empresa = Empresa.builder("Valasso SA", cnpj)
             .responsavel(Responsavel.of("Rosevaldo Braga", Cpf.from("004.574.359-25")))
             .funcionarios(50)
-            .valorMercado(Money.of(500000, "BRL"))
+            .valorMercado(FastMoney.of(500000, "BRL"))
             .build();
         
         conta = Conta.from(empresa);
@@ -75,14 +75,14 @@ public class SolicitarEmprestimoTest {
     @Test
     @DisplayName("Comando de solicitar sem cnpj")
     void comandoSolicitarEmprestimoSemCnpj() {
-        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(null, Money.of(10, "BRL"));
+        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(null, FastMoney.of(10, "BRL"));
         assertFalse(validator.validate(cmd).isEmpty());
     }
 
     @Test
     @DisplayName("Comando de solicitar emprestimo negativo")
     void comandoSolicitarEmprestimoNegativo() {
-        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(cnpj, Money.of(10, "BRL").negate());
+        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(cnpj, FastMoney.of(10, "BRL").negate());
         assertFalse(validator.validate(cmd).isEmpty());
     }
 
@@ -90,7 +90,7 @@ public class SolicitarEmprestimoTest {
     @DisplayName("Solicitar emprestimo sem ter uma conta")
     void solicitarEmprestimoSemConta() {
 
-        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(Cnpj.from("24.152.237/0001-56"), Money.of(10, "BRL"));
+        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(Cnpj.from("24.152.237/0001-56"), FastMoney.of(10, "BRL"));
 
         assertTrue(validator.validate(cmd).isEmpty());
         assertNull(service.handle(cmd));
@@ -100,7 +100,7 @@ public class SolicitarEmprestimoTest {
     @DisplayName("Caminho feliz: solicitar")
     void solicitarEmprestimo() {
 
-        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(cnpj, Money.of(10, "BRL"));
+        SolicitarEmprestimo cmd = SolicitarEmprestimo.of(cnpj, FastMoney.of(10, "BRL"));
 
         assertTrue(validator.validate(cmd).isEmpty());
         assertNotNull(service.handle(cmd));
@@ -110,7 +110,7 @@ public class SolicitarEmprestimoTest {
     @DisplayName("Caminho feliz: aprovar")
     void aprovarEmprestimo() {
 
-        MonetaryAmount valor = Money.of(10, "BRL");
+        MonetaryAmount valor = FastMoney.of(10, "BRL");
         
         EmprestimoId id = service.handle(SolicitarEmprestimo.of(cnpj, valor));
 
@@ -143,7 +143,7 @@ public class SolicitarEmprestimoTest {
     @DisplayName("Caminho feliz: recusar")
     void recusarEmprestimo() {
 
-        MonetaryAmount valor = Money.of(10, "BRL");
+        MonetaryAmount valor = FastMoney.of(10, "BRL");
 
         EmprestimoId id = service.handle(SolicitarEmprestimo.of(cnpj, valor));
 
@@ -178,7 +178,7 @@ public class SolicitarEmprestimoTest {
     @DisplayName("Caminho feliz: quitar")
     void quitarEmprestimo() {
 
-        MonetaryAmount valor = Money.of(10, "BRL");
+        MonetaryAmount valor = FastMoney.of(10, "BRL");
         
         EmprestimoId id = service.handle(SolicitarEmprestimo.of(cnpj, valor));
         service.handle(AprovarEmprestimoPendente.from(id));

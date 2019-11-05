@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,7 +42,7 @@ public class AbrirContaTest {
             .name("Algora LTDA")
             .cnpj(Cnpj.from("19.861.350/0001-70"))
             .funcionarios(30)
-            .valorMercado(Money.of(30000, "BRL"))
+            .valorMercado(FastMoney.of(30000, "BRL"))
             .responsavel(Responsavel.of("Lucio", Cpf.from("185.302.491-00")));
     }
 
@@ -56,7 +56,7 @@ public class AbrirContaTest {
     @Test
     @DisplayName("Comando de abrir conta sem valor de mercado")
     void comandoAbrirContaSemValorMercado() {
-        AbrirConta cmd = builder.valorMercado(Money.of(0, "BRL")).build();
+        AbrirConta cmd = builder.valorMercado(FastMoney.of(0, "BRL")).build();
         assertFalse(validator.validate(cmd).isEmpty());
     }
 

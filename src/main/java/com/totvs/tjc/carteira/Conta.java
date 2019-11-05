@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.Columns;
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public final class Conta {
 
-    public static final MonetaryAmount SALDO_INICIAL = Money.of(0, "BRL");
+    public static final MonetaryAmount SALDO_INICIAL = FastMoney.of(0, "BRL");
 
     @Id
     private final ContaId id;

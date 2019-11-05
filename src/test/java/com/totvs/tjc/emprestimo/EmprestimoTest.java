@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 import javax.money.MonetaryAmount;
 
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,12 +31,12 @@ public class EmprestimoTest {
     @BeforeAll
     static void initAll() {
         
-        valor = Money.of(10, "BRL");
+        valor = FastMoney.of(10, "BRL");
         
         conta = Conta.from(Empresa.builder("Valasso SA", Cnpj.from("23.964.134/0001-28"))
             .responsavel(Responsavel.of("Rosevaldo Braga", Cpf.from("004.574.359-25")))
             .funcionarios(50)
-            .valorMercado(Money.of(500000, "BRL"))
+            .valorMercado(FastMoney.of(500000, "BRL"))
         .build());
     }
 
@@ -64,7 +64,7 @@ public class EmprestimoTest {
     @DisplayName("Caminho feliz com status negado na criação")
     void emprestimoAbertoComoNegado() {
 
-        Emprestimo emprestimo = (Emprestimo) Emprestimo.of(conta, Money.of(100000, "BRL"));
+        Emprestimo emprestimo = (Emprestimo) Emprestimo.of(conta, FastMoney.of(100000, "BRL"));
         
         assertNull(emprestimo.getQuitadoEm());
         assertNull(emprestimo.getLiberadoEm());

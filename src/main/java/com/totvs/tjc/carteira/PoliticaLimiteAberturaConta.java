@@ -5,7 +5,7 @@ import java.util.function.BiFunction;
 
 import javax.money.MonetaryAmount;
 
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 import org.javamoney.moneta.spi.MoneyUtils;
 
 public enum PoliticaLimiteAberturaConta {
@@ -13,13 +13,13 @@ public enum PoliticaLimiteAberturaConta {
     POLITICA_PADRAO((empresa, limiteMaximo) -> {
         MonetaryAmount relation = empresa.getValorMercado().divide(empresa.getFuncionarios());
         return relation.isGreaterThan(limiteMaximo) ? limiteMaximo : relation;
-    }, Money.of(15000, "BRL")),
+    }, FastMoney.of(15000, "BRL")),
 
     POLITICA_MEI((empresa, limiteMaximo) -> {
         MonetaryAmount relation = limiteMaximo.divideToIntegralValue(empresa.getFuncionarios());
         BigDecimal valorBase = MoneyUtils.getBigDecimal(relation.multiply(Math.random()).getNumber());
-        return Money.of(Math.floor(valorBase.doubleValue()), relation.getCurrency());
-    }, Money.of(5000, "BRL"));
+        return FastMoney.of(Math.floor(valorBase.doubleValue()), relation.getCurrency());
+    }, FastMoney.of(5000, "BRL"));
 
     private final BiFunction<Empresa, MonetaryAmount, MonetaryAmount> fn;
 
