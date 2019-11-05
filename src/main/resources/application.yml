@@ -1,0 +1,31 @@
+spring:  
+
+  h2:
+    console:
+      enabled: true
+      
+  datasource:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:mem:tjc;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;
+      username: sa
+      password:
+      
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties: 
+#      javax:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: src\main\resources\db\migration\V1.0__initilize.sql     
+      hibernate:
+        format_sql: true
+        generate_statistics: true

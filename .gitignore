@@ -1,0 +1,35 @@
+**/.git
+**/.metadata
+**/.DS_Store
+**/.README.md.html
+
+# Eclipse
+**/.project
+**/.settings
+**/.classpath
+**/.recommenders
+**/.factorypath
+**/target
+**/bin
+**/.apt_generated
+**/.springBeans
+**/.sts4-cache
+
+# IDEA
+**/*.iml
+**/*.ipr
+**/*.iws
+**/.idea
+**/out
+**/test-output
+
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+**/build/
+
+# VS Code
+.vscode/
