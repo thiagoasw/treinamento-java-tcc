@@ -16,7 +16,6 @@ import org.hibernate.type.StringType;
 import org.hibernate.type.Type;
 import org.hibernate.usertype.CompositeUserType;
 import org.javamoney.moneta.FastMoney;
-import org.javamoney.moneta.Money;
 
 public class MonetaryAmountType implements CompositeUserType {
 
@@ -41,7 +40,7 @@ public class MonetaryAmountType implements CompositeUserType {
         if (isNull(component))
             return null;
 
-        final Money money = (Money) component;
+        final FastMoney money = (FastMoney) component;
 
         switch (propertyIndex) {
             case 0:
@@ -83,7 +82,7 @@ public class MonetaryAmountType implements CompositeUserType {
             preparedStatement.setNull(property, StringType.INSTANCE.sqlType());
             preparedStatement.setNull(property + 1, BigDecimalType.INSTANCE.sqlType());
         } else {
-            final Money amount = (Money) value;
+            final FastMoney amount = (FastMoney) value;
             preparedStatement.setString(property, amount.getCurrency().getCurrencyCode());
             preparedStatement.setBigDecimal(property + 1, amount.getNumber().numberValue(BigDecimal.class));
         }

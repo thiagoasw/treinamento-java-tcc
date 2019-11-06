@@ -21,7 +21,7 @@ public class MoneySupportConfiguration {
         return new MoneyModule()
             .withAmountFieldName(AMOUNT_FIELD_NAME)
             .withCurrencyFieldName(CURRENCY_FIELD_NAME)
-            .withMoney();
+            .withFastMoney();
     }
 
 }

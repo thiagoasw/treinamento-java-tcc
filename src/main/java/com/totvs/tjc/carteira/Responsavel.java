@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import static lombok.AccessLevel.PRIVATE;
 import static org.springframework.util.StringUtils.hasText;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,7 +20,6 @@ public final class Responsavel {
 
     private final String nome;
 
-    @JsonProperty("cpf")
     private final Cpf cpf;
 
     public static Responsavel of(String nome, Cpf cpf) {

@@ -32,9 +32,6 @@ alter table conta
    add constraint UK_a1qbp4t2lyoij3qyfjr1at32d unique (cnpj, funcionarios, razao_social, cpf, nome, valor_mercado_moeda, valor_mercado);
 
 alter table emprestimo 
-   add constraint UK_j2351ofp18u0fetw1t27cjwps unique (conta_id);
-
-alter table emprestimo 
    add constraint FKfr15xahd586maerwk1eridk7d 
    foreign key (conta_id) 
    references conta;

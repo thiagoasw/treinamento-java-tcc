@@ -1,7 +1,5 @@
 package com.totvs.tjc.emprestimo;
 
-import java.time.LocalDateTime;
-
 public interface SituacaoEmprestimo {
 
     public static interface Solicitado {
@@ -21,8 +19,6 @@ public interface SituacaoEmprestimo {
     public static interface Liberado extends Solicitado {
 
         void quitar();
-
-        LocalDateTime getLiberadoEm();
 
     }
 
