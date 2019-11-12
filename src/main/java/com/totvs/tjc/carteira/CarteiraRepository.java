@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface CarteiraRepository {
 
-    void save(Conta conta);
+    Conta save(Conta conta);
 
     Conta getOne(ContaId id);
 

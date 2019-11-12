@@ -15,8 +15,9 @@ public class CarteiraDomainRepositoryMock implements CarteiraRepository {
     private final Map<ContaId, Conta> map = new HashMap<>();
 
     @Override
-    public void save(Conta conta) {
+    public Conta save(Conta conta) {
         map.put(conta.getId(), conta);
+        return conta;
     }
 
     @Override

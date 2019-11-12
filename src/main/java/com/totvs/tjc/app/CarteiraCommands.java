@@ -16,7 +16,7 @@ public interface CarteiraCommands {
 
     @Data
     @Builder
-    public static final class AbrirConta {
+    public static final class AbrirConta implements Command {
 
         @NotBlank
         @ApiModelProperty(required = true)

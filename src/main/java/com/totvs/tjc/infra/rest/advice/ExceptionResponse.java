@@ -2,6 +2,7 @@ package com.totvs.tjc.infra.rest.advice;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 import static lombok.AccessLevel.PRIVATE;
+import static lombok.AccessLevel.PUBLIC;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -20,7 +21,7 @@ import lombok.Getter;
 import lombok.Singular;
 
 @Getter
-@AllArgsConstructor(access = PRIVATE, staticName = "of")
+@AllArgsConstructor(access = PUBLIC, staticName = "of")
 public class ExceptionResponse {
 
     private final String code;

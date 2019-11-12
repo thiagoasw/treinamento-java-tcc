@@ -36,7 +36,7 @@ public class AbrirContaTest {
     @BeforeEach
     void init() {
         
-        service = new CarteiraApplicationService(new CarteiraDomainRepositoryMock());
+        service = new CarteiraApplicationService(validator, new CarteiraDomainRepositoryMock());
         
         builder = AbrirConta.builder()
             .name("Algora LTDA")
